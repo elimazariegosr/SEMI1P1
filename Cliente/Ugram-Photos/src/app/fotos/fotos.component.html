@@ -1,0 +1,54 @@
+<div  >
+    <table *ngFor="let alb of albums" border="3">
+        <tr>
+            <td WIDTH="50" >
+                <h1 style="visibility: hidden">{{alb.album}}</h1>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <h1 >{{alb.album}}</h1>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            
+        </tr>
+        <tr>
+            <td><h1 style="visibility: hidden">Album </h1></td>
+            <td>
+                <div class="wrappers" *ngFor="let ft of alb.imagenes">
+                    <div class="wrapper fadeInDown">
+                        <div id="formContent">
+                            <a id="foto{{ft.id}}" (click) = "mostrar(ft.url)">
+                                <img src="{{ft.url}}" class="fadeIn second" >
+                            </a>
+                        </div>
+                        <p>Foto {{ft.id}}</p>
+                    </div>
+                </div>
+            
+            </td>
+        </tr>
+    </table>
+    
+</div>
+<div #rep_ast id="rep_ast" class="modal fade show" tabindex="-1" style="display: none; " >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="nombre">Imagen</h3>
+          <button type="button" class="close" (click) = "ocultar()"   data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="wrappe">
+            <div class="wrapper fadeInDown">
+                <div class="formContent" id="div_image">
+                </div>
+            </div>
+            
+        </div>
+        
+      </div>
+    </div>
+  </div>

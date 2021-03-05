@@ -1,0 +1,30 @@
+        <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="nombre">Editar perfil</h3>
+          <input type="submit" class="fadeIn fourth" value="Regresar">
+                
+        </div>
+            <form>
+            <table  style="text-align:center;">
+            <tr>
+                <td>
+                    <div class="fadeIn first">
+                        <img src="{{sesion.fotoPerfil.S}}" id="icon" alt="User Icon" />
+                    </div>
+                    <input type="file" id="cargar_foto"  name="login" value="Seleccionar Foto" placeholder="Seleccionar Foto">
+                    
+                </td>
+                <td>
+                    <input type="text" id="user" class="fadeIn second" name="login" placeholder="{{sesion.user.S}}">
+                    <input type="text" id="name" class="fadeIn second" name="login" placeholder="{{sesion.name.S}}">
+                    <input type="password" id="password" class="fadeIn second" name="login" placeholder="Confirm Passowrd">
+                    <input type="submit" class="fadeIn fourth" value="Modificar">
+                
+                </td>
+            </tr>  
+            </table>    
+            
+        </form>
+      </div>
+    </div>
