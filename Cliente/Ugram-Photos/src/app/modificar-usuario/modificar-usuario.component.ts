@@ -11,6 +11,9 @@ export class ModificarUsuarioComponent implements OnInit {
 
   sesion: any;
   constructor(private router: Router) {
+    if(localStorage.getItem("sesion") == ""){
+      this.router.navigate(['/Users/Login'])
+    }
     
     this.sesion = JSON.parse(localStorage.getItem("sesion") +"")
 

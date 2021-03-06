@@ -1,0 +1,65 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="nombre">Cargar Foto</h3>
+      </div>
+          <form>
+                  <div class="wrapper fadeInDown">
+                      <div id="formContent">
+                        <div id="div_imagen">
+                          <img src="{{foto_perfil}}" #imagen id="imagen" alt="User Icon"  width="300" height="300" />
+                        </div>
+                        <div id="div_camara" style="display: none;">
+                          <canvas #c_camara id="c_camara" alt="User Icon"  width="300" height="300"  ></canvas>
+                        </div>
+                        
+                      </div>
+                  </div>
+                      
+                  <input type="file" id="subir_imagen" (change) = "onChange($event)" (click)="mostrar_img()">
+                  <input type="button" value="Tomar Foto" (click) = "mostrar()"> 
+                  <input type="button" value="Cargar Foto" (click) = "cargar_foto()"> 
+      </form>
+    </div>
+  </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <div #div_tomar_foto id="div_tomar_foto" class="modal fade show" tabindex="-1" style="display: none; " >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="nombre">Imagen</h3>
+          <button type="button" class="close" (click) = "ocultar_divtm()"   data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+            <div class="wrapper fadeInDown">
+                <div class="container" id="div_image"> 
+                    <table>
+                      <tr>
+                        <td><h1 style="visibility: hidden;">Fotossss</h1></td>
+                        <td>
+                          <video id="espejo" #espejo style="height: 300; width: 300px;" src="" autoplay="true"></video>
+                        
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td><h1 style="visibility: hidden;">Fotossss</h1></td>
+                        <td>
+                          <input type="submit" class="fadeIn fourth" value="Tomar foto" (click)="tomar_foto()">  
+                        </td>
+                      </tr>
+                    </table>
+                        
+              </div>
+            
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

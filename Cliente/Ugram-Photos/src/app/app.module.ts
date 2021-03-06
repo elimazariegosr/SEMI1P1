@@ -12,6 +12,7 @@ import { SubirFotoComponent } from './subir-foto/subir-foto.component';
 import { ModificarAlbumComponent } from './modificar-album/modificar-album.component';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SeleccionarFotoComponent } from './seleccionar-foto/seleccionar-foto.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     FotosComponent,
     ModificarUsuarioComponent,
     SubirFotoComponent,
-    ModificarAlbumComponent
+    ModificarAlbumComponent,
+    SeleccionarFotoComponent
   ],
   imports: [
     BrowserModule,

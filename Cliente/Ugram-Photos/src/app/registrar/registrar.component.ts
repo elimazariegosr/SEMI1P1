@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-registrar',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrarComponent implements OnInit {
 
-  constructor() { }
+  foto_perfil = ""
+  foto_b64 :any
+  constructor(private router: Router) {
+    localStorage.setItem("ruta_anterior","/Users/Registrar");
+    this.foto_b64 = localStorage.getItem("imgb64");
+
+    this.foto_perfil = localStorage.getItem("encabezado")  +  this.foto_b64;
+    localStorage.removeItem("imgb64");
+    localStorage.removeItem("encabezado");
+
+    console.log(this.foto_perfil);
+   }
 
   ngOnInit(): void {
   }
 
+  agregar_imagen(){
+    this.router.navigate(["/Users/Fotos/Seleccionar"]) 
+  }
+  
 }
