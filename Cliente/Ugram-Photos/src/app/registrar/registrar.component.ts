@@ -12,6 +12,9 @@ export class RegistrarComponent implements OnInit {
   foto_perfil = ""
   foto_b64 :any
   constructor(private router: Router) {
+    if(localStorage.getItem("sesion") != null){
+      this.router.navigate(['/Users'])
+    }
     localStorage.setItem("ruta_anterior","/Users/Registrar");
     this.foto_b64 = localStorage.getItem("imgb64");
 
@@ -19,7 +22,6 @@ export class RegistrarComponent implements OnInit {
     localStorage.removeItem("imgb64");
     localStorage.removeItem("encabezado");
 
-    console.log(this.foto_perfil);
    }
 
   ngOnInit(): void {

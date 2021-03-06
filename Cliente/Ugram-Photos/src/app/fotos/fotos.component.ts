@@ -14,10 +14,9 @@ import { Router } from '@angular/router';
 export class FotosComponent implements OnInit {
   albums:any;
   constructor(private router: Router) {
-    
-
-     
-    
+    if(localStorage.getItem("sesion") == null){
+      this.router.navigate(['/Users/Login'])
+    }
     this.albums= [
       {
         "album":"Fotos de perfil",

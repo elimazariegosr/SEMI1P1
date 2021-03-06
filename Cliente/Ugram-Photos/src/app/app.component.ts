@@ -14,7 +14,6 @@ export class AppComponent {
   }
 
   salir(){
-    console.log("Saliendo")
     localStorage.removeItem("sesion")
     this.router.navigate(['/Users/Login'])
 

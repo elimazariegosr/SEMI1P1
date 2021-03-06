@@ -8,12 +8,11 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['../styles_forms.css']
 })
 export class ModificarAlbumComponent implements OnInit {
-  constructor(private router: Router, private cookie: CookieService) {
+  constructor(private router: Router) {
     
-    if(cookie.get("session") == ""){
+    if(localStorage.getItem("sesion") == null){
       this.router.navigate(['/Users/Login'])
     }
-
   }
 
 

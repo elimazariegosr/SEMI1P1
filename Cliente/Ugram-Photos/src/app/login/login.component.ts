@@ -12,7 +12,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private conexion: ConexionService) {
-
+                if(localStorage.getItem("sesion") != null){
+                  this.router.navigate(['/Users'])
+                }          
     
   }
 
