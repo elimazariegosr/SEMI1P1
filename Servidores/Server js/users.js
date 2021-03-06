@@ -10,6 +10,13 @@ let aws_keys = {
         region: 'us-east-2',
         accessKeyId: "AKIAYNCEHQNLMEBWPNGK",
         secretAccessKey: "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"
+    },
+    db_credentials: {
+        host: "semi-practica1.cgjxuheag3sv.us-east-2.rds.amazonaws.com",
+        port: 3306,
+        user: "admin",
+        password: "12345678",
+        database: "semi1practica1"
     }
 }
-module.exports = aws_keys
+module.exports = aws_keys;
