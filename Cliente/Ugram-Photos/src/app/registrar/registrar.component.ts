@@ -32,54 +32,59 @@ export class RegistrarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registrar(usr:string, nombre:string, pass:string){
-    const md5 = new Md5();
-    let encrip =md5.appendStr(pass).end();
-  
-    let insert  = this.conexion.crear_usuario({"user": usr, "name": nombre,"pass": encrip});
-    let crear_album = this.conexion.crear_album({"user":usr, "album":"Fotos_Perfil"});
-    let crear_foto = this.conexion.crear_foto({"user":usr, "album":"Fotos_Perfil", 
-                                              "origen":"0", "nombreFoto":"Foto1", "tipo":this.tipo_foto, 
-                                              "base64":this.foto_b64});
-    insert.subscribe(resp=>{
-      if(JSON.parse(JSON.stringify(resp)).res == "no"){
-          //this.router.navigate(['/Users/Registrar'])
-          alert("Datos erroneos, porfavor intente de nuevo")
-      }else{        
-        crear_album.subscribe(crear_a =>{
-          if(JSON.parse(JSON.stringify(crear_a)).res == "no"){
-            alert("Datos erroneos, porfavor intente de nuevo")
-          }else{
-            crear_foto.subscribe(crear_f=>{
-              if(JSON.parse(JSON.stringify(crear_f)).res == "no"){
+  registrar(usr:string, nombre:string, pass:string, passc:string){
+    if(pass == passc){
+      if(usr != "" && nombre != "" && pass != "" && this.foto_b64 != null ){
+
+        const md5 = new Md5();
+        let encrip =md5.appendStr(pass).end();
+      
+        let insert  = this.conexion.crear_usuario({"user": usr, "name": nombre,"pass": encrip});
+        let crear_album = this.conexion.crear_album({"user":usr, "album":"Fotos_Perfil"});
+        let crear_foto = this.conexion.crear_foto({"user":usr, "album":"Fotos_Perfil", 
+                                                  "origen":"0", "nombreFoto":"Foto1", "tipo":this.tipo_foto, 
+                                                  "base64":this.foto_b64});
+        insert.subscribe(resp=>{
+          if(resp == null){
+              //this.router.navigate(['/Users/Registrar'])
+              alert("El usuario insertado ya existe")
+          }else{        
+            crear_album.subscribe(crear_a =>{
+              if(crear_a == null){
                 alert("Datos erroneos, porfavor intente de nuevo")
               }else{
-                let url = JSON.parse(JSON.stringify(crear_f)).res;
-                let modificar_u = this.conexion.modificar_usuario({"user":usr, 
-                                                  "userNew":usr, "nombre": nombre, "url":url})  
-    
-                    modificar_u.subscribe(update_u => {
-                      if(JSON.parse(JSON.stringify(update_u)).res == "no"){
-                        alert("Datos erroneos, porfavor intente de nuevo")
-             
-                      }else{
-                        this.router.navigate(['/Users/Login'])
-                        alert("Se actualizo correctamente la foto")
+                crear_foto.subscribe(crear_f=>{
+                  if(crear_f == null){
+                    alert("Datos erroneos, porfavor intente de nuevo")
+                  }else{
+                    let url = JSON.parse(JSON.stringify(crear_f)).res;
+                    let modificar_u = this.conexion.modificar_usuario({"user":usr, 
+                                                      "userNew":usr, "nombre": nombre, "url":url})  
+        
+                        modificar_u.subscribe(update_u => {
+                          if(JSON.parse(JSON.stringify(update_u)).res == "no"){
+                            alert("Datos erroneos, porfavor intente de nuevo")
+                  
+                          }else{
+                            this.router.navigate(['/Users/Login'])
+                            alert("Se Creo correctamente el usuario")
+                          }
+                        })                                                                       
                       }
-                    })                                                                       
-                                      
-                alert("Se creo correctamente la foto")
-               
+                    })
+                  }
+                })
               }
             })
-            alert("Se creo correctamente el album")
-            
-          }
-        })
-        alert("Se creo correctamente el usuario")
+      }else{
+        alert("No se pudo crear el usuario. Verifique su informacion.")
+                          
       }
-     })
+    }else{
+      alert("No se pudo crear el usuario. Las contrasenias no coinciden.")       
+    }
   }
+     
   agregar_imagen(){
     this.router.navigate(["/Users/Fotos/Seleccionar"]) 
   }

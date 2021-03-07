@@ -56,16 +56,31 @@ export class SubirFotoComponent implements OnInit {
     this.router.navigate(["/Users/Fotos/Seleccionar"]) 
   }
   subir_foto(nombre:string){
-    let crear_foto = this.conexion.crear_foto({"user":this.sesion.codigo_usuario, "album":this.verSeleccion, 
-                                              "origen":"1", "nombreFoto":nombre, "tipo":this.tipo_foto, 
-                                              "base64":this.foto_b64});
-    crear_foto.subscribe(crear_f=>{
+    if(this.foto_b64 == null){
+      alert("Por favor seleccione una foto.")
+      return
+    }
+    if(this.verSeleccion == null || this.verSeleccion == 'Seleccione un Album'){
+      alert("Por favor seleccione un Album.")
+      return
+      
+    }
+    if(nombre != ""){
+      let crear_foto = this.conexion.crear_foto({"user":this.sesion.codigo_usuario, "album":this.verSeleccion, 
+                                                "origen":"1", "nombreFoto":nombre, "tipo":this.tipo_foto, 
+                                                "base64":this.foto_b64});
+      crear_foto.subscribe(crear_f=>{
       if(JSON.parse(JSON.stringify(crear_f)).res == null){
-        alert("Datos erroneos, porfavor intente de nuevo")
+      alert("Datos erroneos, porfavor intente de nuevo")
       }else{
-        alert("Se creo correctamente la foto")
-        this.router.navigate(['/Users/Fotos'])    
-     }
-  })
+      alert("Se creo correctamente la foto")
+      this.router.navigate(['/Users/Fotos'])    
+      }
+      })
+
+    }else{
+      alert("No se puede subir la foto, Campo nombre vacio.")
+    }
+   
   }
 }
