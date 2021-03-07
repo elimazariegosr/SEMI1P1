@@ -26,7 +26,6 @@ export class ModificarAlbumComponent implements OnInit {
   capturar(selected: string) {
     // Pasamos el valor seleccionado a la variable verSeleccion
     this.verSeleccion = selected;
-    console.log(this.verSeleccion)
 }
   obtener_albumes(){
     let alb = this.conexion.obtener_albumes_list({"user": this.sesion.codigo_usuario});
@@ -34,7 +33,6 @@ export class ModificarAlbumComponent implements OnInit {
       if(res == null){
         alert("No hay albums")
       }else{
-          console.log(res)
           this.albums = res
       }
     })

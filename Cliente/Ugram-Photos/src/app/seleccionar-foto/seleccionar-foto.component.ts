@@ -10,7 +10,13 @@ import { Observable, Subscriber } from 'rxjs';
 export class SeleccionarFotoComponent implements OnInit {
 
   foto_perfil = ""
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+     
+    if(localStorage.getItem("encabezado") != null && localStorage.getItem("imgb64") != null){
+      this.foto_perfil = localStorage.getItem("encabezado") +"," +  localStorage.getItem("imgb64");
+      ;
+    }
+  }
 
   ngOnInit(): void {
   }

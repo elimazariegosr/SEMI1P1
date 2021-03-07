@@ -18,10 +18,7 @@ export class HomeComponent implements OnInit {
    }
 
    obtener(){
-     console.log("iniciado")
-     console.log(localStorage.getItem("sesion"));
-    
-
+   
    }
   
   ngOnInit(): void {

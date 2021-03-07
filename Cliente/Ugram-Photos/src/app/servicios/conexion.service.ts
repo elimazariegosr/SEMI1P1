@@ -24,7 +24,6 @@ export class ConexionService {
     return this.http.post(this.url +'buscarUsuario', data)
   }
   crear_foto(data:any){
-    console.log(data)
     return this.http.post(this.url +'crearFoto', data)
   }
   crear_album(data:any){

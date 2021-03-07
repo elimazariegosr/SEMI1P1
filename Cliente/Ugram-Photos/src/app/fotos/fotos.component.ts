@@ -29,7 +29,6 @@ export class FotosComponent implements OnInit {
   mostrar(url:string){
     const div  = document.getElementById('rep_ast');
     if(div) div.style.display = 'block';
-    console.log(url);
     const div_image = document.getElementById('div_image');
     if(div_image) div_image.innerHTML = "<img src=" + url + " class=\"fadeIn second\"  style=\"max-height: 400px;\">"; 
 
@@ -44,7 +43,6 @@ export class FotosComponent implements OnInit {
         if(res == null){
           alert("No hay albums")
         }else{
-          console.log(JSON.parse(JSON.stringify(res)));
           this.crear_albumes(JSON.parse(JSON.stringify(res)))
         }
       })
@@ -55,7 +53,6 @@ export class FotosComponent implements OnInit {
         
         this.buscar_album(res[i].nombreA)[1].push([res[i].nombreF, res[i].url_fotop])
     }
-    console.log(this.albums)
   }
   buscar_album(nombre: string){
       for(let i in this.albums){

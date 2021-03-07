@@ -63,7 +63,7 @@ export class ModificarUsuarioComponent implements OnInit {
                                         "base64":this.foto_b64});
     
         crear_foto.subscribe(crear_f=>{
-          if(JSON.parse(JSON.stringify(crear_f)).res == null){
+          if(crear_f == null){
             alert("Datos erroneos, porfavor intente de nuevo")
           }else{
             let url = JSON.parse(JSON.stringify(crear_f)).res;
@@ -71,7 +71,7 @@ export class ModificarUsuarioComponent implements OnInit {
                                               "userNew":usr, "nombre": nombre, "url":url})  
     
             modificar_u.subscribe(update_u => {
-              if(JSON.parse(JSON.stringify(update_u)).res == null){
+              if(update_u == null){
                 alert("Datos erroneos, porfavor intente de nuevo")
       
               }else{

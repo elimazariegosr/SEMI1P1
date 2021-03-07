@@ -62,7 +62,7 @@ export class RegistrarComponent implements OnInit {
                                                       "userNew":usr, "nombre": nombre, "url":url})  
         
                         modificar_u.subscribe(update_u => {
-                          if(JSON.parse(JSON.stringify(update_u)).res == "no"){
+                          if(update_u == null){
                             alert("Datos erroneos, porfavor intente de nuevo")
                   
                           }else{

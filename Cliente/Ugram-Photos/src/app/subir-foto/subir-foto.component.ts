@@ -38,7 +38,6 @@ export class SubirFotoComponent implements OnInit {
       if(res == null){
         alert("No hay albums")
       }else{
-          console.log(res)
           this.albums = res
       }
     })
@@ -46,7 +45,6 @@ export class SubirFotoComponent implements OnInit {
   capturar(selected: string) {
     // Pasamos el valor seleccionado a la variable verSeleccion
     this.verSeleccion = selected;
-    console.log(this.verSeleccion)
 }
 
   ngOnInit(): void {
