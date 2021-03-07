@@ -30,6 +30,7 @@
                     <input type="text" id="n_img" #n_img class="fadeIn second" name="login" placeholder="Nombre de la imagen">
                     <h2>Album</h2>
                     <select #select id="select" (change)="capturar(select.value)">
+                      <option>Seleccione un Album</option>
                       <option *ngFor="let alb of albums">
                           {{alb.nombre}}
                       </option>

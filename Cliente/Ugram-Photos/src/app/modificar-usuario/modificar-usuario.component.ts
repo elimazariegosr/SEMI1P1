@@ -42,67 +42,63 @@ export class ModificarUsuarioComponent implements OnInit {
     this.router.navigate(["/Users/Fotos/Seleccionar"]) 
   }
   modificar(usr:string, nombre:string, psw:string, nfoto:string){
-      if(usr == "")usr = this.sesion.user
-      let es_usr = this.conexion.buscar_usuario({"user": this.sesion.codigo_usuario});
-      es_usr.subscribe(res=>{
-        if(res == null){
-          alert("Datos erroneos, porfavor intente de nuevo")
-        }else{
-          console.log("Se encontro")
-          const md5 = new Md5();
-          let encrip =md5.appendStr(psw).end();
-          let crear_foto = this.conexion.crear_foto({"user":this.sesion.codigo_usuario, "album":"Fotos_Perfil", 
-                                              "origen":"0", "nombreFoto":nfoto, "tipo":this.tipo_foto, 
-                                              "base64":this.foto_b64});
-    
-          if(JSON.parse(JSON.stringify(res))[0].psw == encrip){
-            localStorage.setItem("sesion", JSON.stringify(res));
-            if(this.foto_b64 != null){
-              crear_foto.subscribe(crear_f=>{
-                if(JSON.parse(JSON.stringify(crear_f)).res == null){
-                  alert("Datos erroneos, porfavor intente de nuevo")
-                }else{
-                  let url = JSON.parse(JSON.stringify(crear_f)).res;
-                  let modificar_u = this.conexion.modificar_usuario({"user":this.sesion.codigo_usuario, 
-                                                    "userNew":usr, "nombre": nombre, "url":url})  
-      
-                      modificar_u.subscribe(update_u => {
-                        if(JSON.parse(JSON.stringify(update_u)).res == null){
-                          alert("Datos erroneos, porfavor intente de nuevo")
-               
-                        }else{
-                          alert("Se actualizo correctamente")
-                          this.actualizar_session(usr)
-                        }
-                      })                                                                       
-                 
-                }
-              })
-            }else{
-              let modificar_u = this.conexion.modificar_usuario({"user":this.sesion.codigo_usuario, 
-                                                    "userNew":usr, "nombre": nombre, 
-                                                    "url":JSON.parse(JSON.stringify(res))[0].url_fotop})  
-      
-                      modificar_u.subscribe(update_u => {
-                        if(JSON.parse(JSON.stringify(update_u)).res == null){
-                          alert("Datos erroneos, porfavor intente de nuevo")
-               
-                        }else{
-                          alert("Se actualizo correctamente")
-                          this.actualizar_session(usr)
-                        }
-                      })                                                                       
-                 
-                
-            }
-            
-          }else{
-            this.router.navigate(['/Users/Login'])
-            alert("Datos erroneos, porfavor intente de nuevo")
-          }
+      if(usr == "" || nombre =="" || psw == ""){
+        alert("Campos vacios")
+        return
+      }
+      const md5 = new Md5();
+      let encrip =md5.appendStr(psw).end();
+      if(encrip != this.sesion.psw){
+        alert("Contrasenia incorrecta")
+        return
+        
+      }
+      if(this.foto_b64 != null){
+        if(nfoto == ""){
+          alert("Por favor ingresele nombre a la imagen seleccionada.")
+          return
         }
-      })
-  }
+          let crear_foto = this.conexion.crear_foto({"user":this.sesion.codigo_usuario, "album":"Fotos_Perfil", 
+                                        "origen":"0", "nombreFoto":nfoto, "tipo":this.tipo_foto, 
+                                        "base64":this.foto_b64});
+    
+        crear_foto.subscribe(crear_f=>{
+          if(crear_f == null){
+            alert("Datos erroneos, porfavor intente de nuevo")
+          }else{
+            let url = JSON.parse(JSON.stringify(crear_f)).res;
+            let modificar_u = this.conexion.modificar_usuario({"user":this.sesion.codigo_usuario, 
+                                              "userNew":usr, "nombre": nombre, "url":url})  
+    
+            modificar_u.subscribe(update_u => {
+              if(update_u == null){
+                alert("Datos erroneos, porfavor intente de nuevo")
+      
+              }else{
+                alert("Se actualizo correctamente")
+                this.actualizar_session(usr)
+              }
+            })                                                                       
+                
+          }
+        })
+    
+      }else{
+        let modificar_u = this.conexion.modificar_usuario({"user":this.sesion.codigo_usuario, 
+        "userNew":usr, "nombre": nombre, 
+        "url":this.sesion.url_fotop})  
+
+        modificar_u.subscribe(update_u => {
+        if(update_u == null){
+          alert("Datos erroneos, porfavor intente de nuevo")
+
+        }else{
+          alert("Se actualizo correctamente")
+          this.actualizar_session(usr)
+          }
+        })                                                                       
+      }
+    }
   actualizar_session(usr:string){
     let sesion = this.conexion.buscar_usuario({"user" : usr});
 

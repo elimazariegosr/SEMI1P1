@@ -26,7 +26,6 @@ export class ModificarAlbumComponent implements OnInit {
   capturar(selected: string) {
     // Pasamos el valor seleccionado a la variable verSeleccion
     this.verSeleccion = selected;
-    console.log(this.verSeleccion)
 }
   obtener_albumes(){
     let alb = this.conexion.obtener_albumes_list({"user": this.sesion.codigo_usuario});
@@ -34,13 +33,16 @@ export class ModificarAlbumComponent implements OnInit {
       if(res == null){
         alert("No hay albums")
       }else{
-          console.log(res)
           this.albums = res
       }
     })
   }
 
   eliminar_a(){
+    if(this.verSeleccion == null || this.verSeleccion == 'Seleccione un Album'){
+      alert("Por favor seleccione un Album.")
+      return 
+    }
     let eliminar = this.conexion.eliminar_album({"user":this.sesion.codigo_usuario, "album": this.verSeleccion})
     eliminar.subscribe(elim =>{
       if(elim == null){
@@ -53,15 +55,19 @@ export class ModificarAlbumComponent implements OnInit {
   
   }
   crear_a(nombre:string){
-    let crear_album = this.conexion.crear_album({"user":this.sesion.codigo_usuario, "album":nombre});
-    crear_album.subscribe(crear_a =>{
-      if(JSON.parse(JSON.stringify(crear_a)).res == null){
-        alert("Datos erroneos, porfavor intente de nuevo")
-      }else{
-        alert("Se creo correctamenta el Album")
-        location.reload()
-      }
-    })
+    if(nombre != ""){
+      let crear_album = this.conexion.crear_album({"user":this.sesion.codigo_usuario, "album":nombre});
+      crear_album.subscribe(crear_a =>{
+        if(JSON.parse(JSON.stringify(crear_a)).res == null){
+          alert("Datos erroneos, porfavor intente de nuevo")
+        }else{
+          alert("Se creo correctamenta el Album")
+          location.reload()
+        }
+      })  
+    }else{
+      alert("No se puede crear el album, Campo nombre vacio.")
+    }
   }
   ngOnInit(): void {
   }

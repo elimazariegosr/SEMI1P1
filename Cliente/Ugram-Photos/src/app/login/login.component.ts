@@ -6,7 +6,8 @@ import {Md5} from 'ts-md5/dist/md5';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../styles_forms.css']
+  styleUrls: ['../styles_forms.css'],
+  providers: [ConexionService]
 })
 export class LoginComponent implements OnInit {
 

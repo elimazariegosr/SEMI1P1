@@ -17,7 +17,7 @@
                   </div>
                       
                   <input type="file" id="subir_imagen" (change) = "onChange($event)" (click)="mostrar_img()">
-                  <input type="button" value="Tomar Foto" (click) = "mostrar()"> 
+                  <input type="button" value="Tomar Foto" onclick="activar_cam()" (click) = "mostrar()"> 
                   <input type="button" value="Cargar Foto" (click) = "cargar_foto()"> 
       </form>
     </div>
@@ -50,7 +50,7 @@
                       <tr>
                         <td><h1 style="visibility: hidden;">Fotossss</h1></td>
                         <td>
-                          <input type="submit" class="fadeIn fourth" value="Tomar foto" (click)="tomar_foto()">  
+                          <input type="submit" class="fadeIn fourth" value="Tomar foto" onclick="desactivar_cam()" (click)="tomar_foto()" >  
                         </td>
                       </tr>
                     </table>

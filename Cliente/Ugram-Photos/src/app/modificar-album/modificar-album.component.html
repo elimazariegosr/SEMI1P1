@@ -15,6 +15,7 @@
                 <br>
                     <h2>Album</h2><br>
                     <select #select id="select" (change)="capturar(select.value)">
+                        <option>Seleccione un Album</option>
                         <option *ngFor="let alb of albums">
                             {{alb.nombre}}
                         </option>
