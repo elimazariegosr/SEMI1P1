@@ -4,7 +4,6 @@
           <h3 class="modal-title" id="nombre">Editar perfil</h3>
                 
         </div>
-            <form>
             <table  style="text-align:center;">
             <tr>
               <td>
@@ -16,6 +15,7 @@
                       <div id="formContent">
                         <div id="div_imagen">
                           <img src="{{foto_perfil}}" #imagen id="imagen" alt="User Icon"  width="300" height="300" />
+                 
                         </div>
                         
                       </div>
@@ -24,23 +24,23 @@
                       
               </td>
              <td>
-                    <input type="text" id="user" class="fadeIn second" name="login" placeholder="{{sesion.user.S}}">
-                    <input type="text" id="name" class="fadeIn second" name="login" placeholder="{{sesion.name.S}}">
-                    <input type="password" id="password" class="fadeIn second" name="login" placeholder="Confirm Passowrd">
+                    <input type="text" id="usr" #usr class="fadeIn second" value="{{sesion.codigo_usuario}}">
+                    <input type="text" id="nombre" #nombre class="fadeIn second" value="{{sesion.nombre}}">
+                    <input type="password" id="psw" #psw class="fadeIn second" placeholder="Confirm Passowrd">
                 
                 </td>
             </tr>
             <tr>
               <td>
+                <input type="text" id="nombref" #nombref class="fadeIn second" placeholder="Nombre de imagen" />
+                 
                 <input type="button" value="Agregar Imagen" (click) = "agregar_imagen()"> 
               </td>
               <td>
-                <input type="submit" class="fadeIn fourth" value="Modificar">
+                <input type="submit" class="fadeIn fourth" value="Modificar" (click) ="modificar(usr.value, nombre.value, psw.value,nombref.value)">
               </td>
             </tr>  
-            </table>    
-            
-        </form>
+            </table>              
       </div>
     </div>
   

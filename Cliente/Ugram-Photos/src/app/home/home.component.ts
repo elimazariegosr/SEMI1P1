@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     if(localStorage.getItem("sesion") == null){
       this.router.navigate(['/Users/Login'])
     }
-      this.sesion = JSON.parse(localStorage.getItem("sesion") +"")
+      this.sesion = JSON.parse(localStorage.getItem("sesion") +"")[0]
    }
 
    obtener(){

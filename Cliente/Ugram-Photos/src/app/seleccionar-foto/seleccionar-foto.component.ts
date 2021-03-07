@@ -44,8 +44,10 @@ export class SeleccionarFotoComponent implements OnInit {
     observable.subscribe((d)=>{
       let valores = (d+"").split(",")
       this.foto_perfil = d ;
-      localStorage.setItem("encabezado", valores[0] + ",");
+      localStorage.setItem("encabezado", valores[0]);
       localStorage.setItem("imgb64", valores[1]);
+      localStorage.setItem("tipoimg", valores[0].split("/")[1].split(";")[0]);
+      
     })
   }
 
@@ -90,9 +92,11 @@ export class SeleccionarFotoComponent implements OnInit {
     if(contex != null){
       if(video != null){
         contex.drawImage(video, 0,0,300, 300)
-          localStorage.setItem("encabezado","");
-          localStorage.setItem("imgb64",canv.toDataURL("image/jpeg"));
-        }
+          let img = canv.toDataURL("image/jpeg").split(",");
+          localStorage.setItem("encabezado",img[0]);
+          localStorage.setItem("imgb64",img[1]);
+          localStorage.setItem("tipoimg", "jpeg");
+       }
     }
     this.ocultar_divtm()
   }

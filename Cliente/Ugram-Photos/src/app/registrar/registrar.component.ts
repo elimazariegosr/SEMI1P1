@@ -1,6 +1,8 @@
 import { Component, OnInit, Injectable, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscriber } from 'rxjs';
+import { ConexionService } from '../servicios/conexion.service';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-registrar',
@@ -9,16 +11,19 @@ import { Observable, Subscriber } from 'rxjs';
 })
 export class RegistrarComponent implements OnInit {
 
-  foto_perfil = ""
-  foto_b64 :any
-  constructor(private router: Router) {
+  foto_perfil = "";
+  foto_b64 :any;
+  usr_creado :any;
+  tipo_foto:any;
+  constructor(private router: Router, private conexion: ConexionService) {
     if(localStorage.getItem("sesion") != null){
       this.router.navigate(['/Users'])
     }
     localStorage.setItem("ruta_anterior","/Users/Registrar");
     this.foto_b64 = localStorage.getItem("imgb64");
 
-    this.foto_perfil = localStorage.getItem("encabezado")  +  this.foto_b64;
+    this.foto_perfil = localStorage.getItem("encabezado") +"," +  this.foto_b64;
+    this.tipo_foto = localStorage.getItem("tipoimg");
     localStorage.removeItem("imgb64");
     localStorage.removeItem("encabezado");
 
@@ -27,8 +32,55 @@ export class RegistrarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  registrar(usr:string, nombre:string, pass:string){
+    const md5 = new Md5();
+    let encrip =md5.appendStr(pass).end();
+  
+    let insert  = this.conexion.crear_usuario({"user": usr, "name": nombre,"pass": encrip});
+    let crear_album = this.conexion.crear_album({"user":usr, "album":"Fotos_Perfil"});
+    let crear_foto = this.conexion.crear_foto({"user":usr, "album":"Fotos_Perfil", 
+                                              "origen":"0", "nombreFoto":"Foto1", "tipo":this.tipo_foto, 
+                                              "base64":this.foto_b64});
+    insert.subscribe(resp=>{
+      if(JSON.parse(JSON.stringify(resp)).res == "no"){
+          //this.router.navigate(['/Users/Registrar'])
+          alert("Datos erroneos, porfavor intente de nuevo")
+      }else{        
+        crear_album.subscribe(crear_a =>{
+          if(JSON.parse(JSON.stringify(crear_a)).res == "no"){
+            alert("Datos erroneos, porfavor intente de nuevo")
+          }else{
+            crear_foto.subscribe(crear_f=>{
+              if(JSON.parse(JSON.stringify(crear_f)).res == "no"){
+                alert("Datos erroneos, porfavor intente de nuevo")
+              }else{
+                let url = JSON.parse(JSON.stringify(crear_f)).res;
+                let modificar_u = this.conexion.modificar_usuario({"user":usr, 
+                                                  "userNew":usr, "nombre": nombre, "url":url})  
+    
+                    modificar_u.subscribe(update_u => {
+                      if(JSON.parse(JSON.stringify(update_u)).res == "no"){
+                        alert("Datos erroneos, porfavor intente de nuevo")
+             
+                      }else{
+                        this.router.navigate(['/Users/Login'])
+                        alert("Se actualizo correctamente la foto")
+                      }
+                    })                                                                       
+                                      
+                alert("Se creo correctamente la foto")
+               
+              }
+            })
+            alert("Se creo correctamente el album")
+            
+          }
+        })
+        alert("Se creo correctamente el usuario")
+      }
+     })
+  }
   agregar_imagen(){
     this.router.navigate(["/Users/Fotos/Seleccionar"]) 
   }
-  
 }

@@ -8,13 +8,13 @@
       </div>
   
       <!-- Login Form -->
-        <input type="text" #login id="login" class="fadeIn second" name="login" placeholder="login" value="elimazarieos">
-        <input type="password" #password id="password" class="fadeIn third" name="login" placeholder="password" value="elimazarieos">
+        <input type="text" #login id="login" class="fadeIn second" name="login" placeholder="login" value="eli">
+        <input type="password" #password id="password" class="fadeIn third" name="login" placeholder="password" value="eli">
         <input type="submit" class="fadeIn fourth" value="Log In" (click) = "validar_login(login.value, password.value)">
       
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
+        <a class="underlineHover" [routerLink]="['Users/Registrar']">Necesitas una cuenta?</a>
       </div>
   
     </div>

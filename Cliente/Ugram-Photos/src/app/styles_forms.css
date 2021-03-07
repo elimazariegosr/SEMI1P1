@@ -65,11 +65,11 @@ html {
  
   .wrappers img{
     width: 100%;
-    height: auto;
+    max-height: 250px;
   } 
   .wrappe img{
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 200px;
+    max-height: 250px;
   } 
   
   #formContent {

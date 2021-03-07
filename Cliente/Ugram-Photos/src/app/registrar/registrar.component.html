@@ -1,9 +1,8 @@
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-lg ">
   <div class="modal-content">
     <div class="modal-header">
       <h3 class="modal-title" id="nombre">Crear Perfil</h3>
     </div>
-        <form>
         <table  style="text-align:center;">
         <tr>
             <td>
@@ -23,10 +22,10 @@
                     
             </td>
             <td>
-              <input type="text" id="login" class="fadeIn second"  placeholder="User Name">
-              <input type="text" id="login" class="fadeIn second"  placeholder="Name">
-              <input type="password" id="login" class="fadeIn second"  placeholder="Passowrd">
-              <input type="password" id="login" class="fadeIn second"  placeholder="Confirm Passowrd">
+              <input type="text" #user id="user" class="fadeIn second"  placeholder="User Name">
+              <input type="text" #name id="name" class="fadeIn second"  placeholder="Name">
+              <input type="password" #psw id="psw" class="fadeIn second"  placeholder="Passowrd">
+              <input type="password" #psw1 id="psw1" class="fadeIn second"  placeholder="Confirm Passowrd">
 
             </td>
         </tr>  
@@ -35,11 +34,9 @@
             <input type="button" value="Agregar Imagen" (click) = "agregar_imagen()"> 
           </td>
           <td>
-            <input type="submit" class="fadeIn fourth" value="Crear">
+            <input type="submit" class="fadeIn fourth" (click) = "registrar(user.value, name.value, psw.value)" value="Crear">
           </td>
         </tr>
       </table>    
-        
-    </form>
   </div>
 </div>
