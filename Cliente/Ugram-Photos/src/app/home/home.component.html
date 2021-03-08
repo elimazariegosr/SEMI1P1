@@ -1,0 +1,47 @@
+
+<table class="table">
+    <tr>
+        <td>
+            <h3 style="color: lightyellow;">Datos personales</h3>
+            <div >
+                <div class="wrappe">
+                    <div class="wrapper fadeInDown">
+                        <div id="formContent">
+                            <img src="{{sesion.url_fotop}}" class="fadeIn second" >
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="wrappe" >
+                    <div class="wrapper fadeInDown">
+                        <div id="formContent" >
+                            <form>
+                                <h1>Usuario</h1>  
+                                    <h2>Usuario </h2>
+                                    <input type="text" id="login" class="fadeIn second" disabled name="login"  placeholder="{{sesion.codigo_usuario}}">
+                                    <h2>Nombre </h2>
+                                    <input type="text" id="password" class="fadeIn third" disabled name="login" placeholder="{{sesion.nombre}}">
+                                    <br>
+                                <input type="submit" (click)="editar_perfil()" class="fadeIn fourth" value="Editar Perfil">
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="wrappe">
+                    <div class="wrapper fadeInDown">
+                        <div id="formContent">
+                            <form>
+                                <h1>Acciones</h1>
+                                <input type="submit" (click) = "ver_fotos()" class="fadeIn fourth" value="Ver Fotos">
+                                <input type="submit" (click) = "subir_foto()" class="fadeIn fourth" value="Subir Foto">
+                                <input type="submit" (click) = "editar_album()" class="fadeIn fourth" value="Editar Albumes">
+                            </form>
+                       </div>
+                    </div>
+                </div>
+            </div>
+                
+        </td>
+    </tr>
+</table>

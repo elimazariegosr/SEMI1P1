@@ -1,0 +1,28 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="nombre">Gestion de Album</h3>
+
+      </div>
+          <table  style="text-align:center;">
+          <tr>
+              <!--</tr>  
+            <tr>-->
+                <td>
+                    <h2>Nombre del Album</h2>
+                    <input type="text" id="nombre_a" #nombre_a class="fadeIn second"  placeholder="Nombre del Album">
+                    <input type="submit" class="fadeIn fourth" value="Agregar Album" (click)="crear_a(nombre_a.value)">
+                <br>
+                    <h2>Album</h2><br>
+                    <select #select id="select" (change)="capturar(select.value)">
+                        <option>Seleccione un Album</option>
+                        <option *ngFor="let alb of albums">
+                            {{alb.nombre}}
+                        </option>
+                    </select>
+                    <input type="submit" class="fadeIn fourth" value="Eliminar Album" (click)="eliminar_a()">
+                </td>        
+            </tr>  
+          </table>    
+    </div>
+  </div>
