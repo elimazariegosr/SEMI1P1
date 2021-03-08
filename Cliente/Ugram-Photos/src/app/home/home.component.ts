@@ -11,17 +11,14 @@ export class HomeComponent implements OnInit {
 
   sesion:any;
   constructor(private router: Router) {
-    if(localStorage.getItem("sesion") == ""){
+    if(localStorage.getItem("sesion") == null){
       this.router.navigate(['/Users/Login'])
     }
-      this.sesion = JSON.parse(localStorage.getItem("sesion") +"")
+      this.sesion = JSON.parse(localStorage.getItem("sesion") +"")[0]
    }
 
    obtener(){
-     console.log("iniciado")
-     console.log(localStorage.getItem("sesion"));
-    
-
+   
    }
   
   ngOnInit(): void {

@@ -1,14 +1,14 @@
-<table class="table" border="3">
+
+<table class="table">
     <tr>
         <td>
-            <h3>Datos personales</h3>
+            <h3 style="color: lightyellow;">Datos personales</h3>
             <div >
                 <div class="wrappe">
                     <div class="wrapper fadeInDown">
                         <div id="formContent">
-                            <img src="{{sesion.fotoPerfil.S}}" class="fadeIn second" >
+                            <img src="{{sesion.url_fotop}}" class="fadeIn second" >
                         </div>
-                        <p>Foto {{sesion.nombreFoto.S}}</p>
                     </div>
                 </div>
             
@@ -18,9 +18,9 @@
                             <form>
                                 <h1>Usuario</h1>  
                                     <h2>Usuario </h2>
-                                    <input type="text" id="login" class="fadeIn second" disabled name="login"  placeholder="{{sesion.user.S}}">
+                                    <input type="text" id="login" class="fadeIn second" disabled name="login"  placeholder="{{sesion.codigo_usuario}}">
                                     <h2>Nombre </h2>
-                                    <input type="text" id="password" class="fadeIn third" disabled name="login" placeholder="{{sesion.name.S}}">
+                                    <input type="text" id="password" class="fadeIn third" disabled name="login" placeholder="{{sesion.nombre}}">
                                     <br>
                                 <input type="submit" (click)="editar_perfil()" class="fadeIn fourth" value="Editar Perfil">
                             </form>

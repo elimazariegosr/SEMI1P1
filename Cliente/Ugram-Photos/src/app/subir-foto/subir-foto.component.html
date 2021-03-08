@@ -4,32 +4,51 @@
         <h3 class="modal-title" id="nombre">Subir Imagen</h3>
 
       </div>
-          <form>
-          <table  style="text-align:center;">
+          <table  style="text-align:center;" >
           <tr>
-              <td>
-                  <div class="fadeIn first">
-                      <img src="https://ksatravel.net//assets/img/admin.png" id="icon" alt="User Icon" />
-                  </div>
-                  <input type="file" id="cargar_foto"  name="login" value="Seleccionar Foto" placeholder="Seleccionar Foto">
-                  
-              </td>
+            <td>
+              <div class="container">
+                
+              </div>
+              <div class="wrappers" >
+                <div class="wrapper fadeInDown">
+                    <div id="formContent">
+                      <div id="div_imagen">
+                        <img src="{{foto_cargada}}" #imagen id="imagen" alt="User Icon"  width="300" height="300" />
+                      </div>
+                      
+                    </div>
+                </div>
+              </div> 
+                    
+            </td>
+           
             <!--</tr>  
             <tr>-->
                 <td>
                     <h2>Nombre de la imagen</h2>
-                    <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre de la imagen">
+                    <input type="text" id="n_img" #n_img class="fadeIn second" name="login" placeholder="Nombre de la imagen">
                     <h2>Album</h2>
-                    <select >
-                        <option>Album 1</option>
-                    </select>
-                    <input type="submit" class="fadeIn fourth" value="Subir">
+                    <select #select id="select" (change)="capturar(select.value)">
+                      <option>Seleccione un Album</option>
+                      <option *ngFor="let alb of albums">
+                          {{alb.nombre}}
+                      </option>
+                  </select>
                 
                 </td>
-           
+            </tr>
+            <tr>
+              <td>
+                <input type="button" value="Agregar Imagen" (click) = "agregar_imagen()"> 
+              </td>
+              <td>
+                <input type="submit" class="fadeIn fourth" value="Subir Foto" (click)="subir_foto(n_img.value)">
+              </td>
             </tr>  
           </table>    
           
-      </form>
     </div>
   </div>
+
+  

@@ -1,20 +1,42 @@
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-      <h1>Registrar Usuario</h1>
-      <form>
-        <input type="text" id="login" class="fadeIn second" name="login" placeholder="User Name">
-        <input type="text" id="login" class="fadeIn second" name="login" placeholder="Name">
-        <input type="password" id="login" class="fadeIn second" name="login" placeholder="Passowrd">
-        <input type="password" id="login" class="fadeIn second" name="login" placeholder="Confirm Passowrd">
-        <input type="file" id="cargar_foto"  name="login" value="Seleccionar Foto" placeholder="Seleccionar Foto">
-       
-        <input type="submit" class="fadeIn fourth" value="Registrar">
-      </form>
-  
-      <!-- Remind Passowrd -->
-      <div id="formFooter">
-        <a class="underlineHover" href="#">Ya tienes una cuenta?</a>
-      </div>
+<div class="modal-dialog modal-lg ">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="nombre">Crear Perfil</h3>
     </div>
+        <table  style="text-align:center;">
+        <tr>
+            <td>
+              <div class="container">
+                
+              </div>
+              <div class="wrappers" >
+                <div class="wrapper fadeInDown">
+                    <div id="formContent">
+                      <div id="div_imagen">
+                        <img src="{{foto_perfil}}" #imagen id="imagen" alt="User Icon"  width="300" height="300" />
+                      </div>
+                      
+                    </div>
+                </div>
+              </div> 
+                    
+            </td>
+            <td>
+              <input type="text" #user id="user" class="fadeIn second"  placeholder="User Name">
+              <input type="text" #name id="name" class="fadeIn second"  placeholder="Name">
+              <input type="password" #psw id="psw" class="fadeIn second"  placeholder="Passowrd">
+              <input type="password" #psw1 id="psw1" class="fadeIn second"  placeholder="Confirm Passowrd">
+
+            </td>
+        </tr>  
+        <tr>
+          <td>
+            <input type="button" value="Agregar Imagen" (click) = "agregar_imagen()"> 
+          </td>
+          <td>
+            <input type="submit" class="fadeIn fourth" (click) = "registrar(user.value, name.value, psw.value, psw1.value)" value="Crear">
+          </td>
+        </tr>
+      </table>    
   </div>
-  
+</div>
