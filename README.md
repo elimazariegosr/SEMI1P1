@@ -216,4 +216,180 @@ except Exception as e:
     return 'null'
 ```
 
-## FrontEnd
+# FrontEnd
+
+[![N|Solid](https://angular.io/assets/images/logos/angular/logo-nav@2x.png)](https://https://angular.io/)
+
+## Librerias utlizadas
+Para el cliente se utiliza angular, haciendo uso de librerias para el correcto funcionamiento de este mismo, las cuales son:
+- HttpClientModule
+La cual sirve para la conexicon con el servidor backend, haciendo las peticiones por medo de metodos (GET, POST, PUT y DELETE), conectandose al DNS generado por el balanceador de carga encontrado en AWS,  http://Practica1-1781073929.us-east-2.elb.amazonaws.com, el cual se corre en el puerto 3000.
+- Bootstrap
+Libreria para la parte visual de los modulos.
+
+
+## Instalacion
+
+Es necesario tener instalado nodejs y  npm.
+--Instalar nodejs de la pagina principal:  https://nodejs.org/en/
+```sh
+npm install npm@latest -g
+```
+Instalacion de Angular cli
+
+```sh
+npm install -g @angular/cli
+```
+
+Creacion del primer proyecto con angular
+
+```sh
+ng new NuevoProyecto
+```
+
+Nos ubicamos en la carpeta de creacion del proyecto
+
+```sh
+cd NuevoProyecto
+```
+
+Creacion de componentes para un proyecto con angular
+
+```sh
+ng generate component Nombre_del_componente
+o
+ng g c Nombre_del_componente
+```
+
+Creacion de servicios para un proyecto con angular
+
+```sh
+ng generate service Nombre_del_componente
+o
+ng g s Nombre_del_componente
+```
+
+Para correr el proyecto, debemos ubicarnos en la carpeta de este y ejecutar el siguiente comando:
+
+```sh
+ng serve
+```
+## Conexion al servidor 
+se deben de importar las librerias:
+- Injectable de las core de angular
+- HttpClient y HttpHeaders de la libreria http de common de angular
+```sh
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ConexionService {
+  url:any
+  constructor(private http:HttpClient) { 
+    this.url = "http://Practica1-1781073929.us-east-2.elb.amazonaws.com:3000/";
+
+
+  }
+  headers: HttpHeaders = new HttpHeaders({
+    "Content-Type": "application/json"
+  })
+
+  login(data:any){
+    return this.http.post(this.url + 'login', data)
+  }
+}
+
+```
+## Ejemplo de llamada a la peticion
+```sh
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import {ConexionService} from '../servicios/conexion.service';
+import {Md5} from 'ts-md5/dist/md5';
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['../styles_forms.css'],
+  providers: [ConexionService]
+})
+export class LoginComponent implements OnInit {
+
+//Obteniendo las rutas para redirigir las paginas
+//Obteniendo la conexion del servicio
+//obteniendo la sesion del localStorage
+  constructor(private router: Router,
+              private conexion: ConexionService) {
+                if(localStorage.getItem("sesion") != null){
+                  this.router.navigate(['/Users'])
+                }          
+    
+  }
+
+  ngOnInit(): void {
+  }
+  
+  validar_login(usr:string, pass:string){
+    
+    if(usr == "" && pass == ""){
+        alert("Campos vacios")
+    }else{
+    
+      let sesion = this.conexion.buscar_usuario({"user" : usr});
+
+      sesion.subscribe(resp=>{
+        if(resp == null){
+            this.router.navigate(['/Users/Login'])
+            alert("Datos erroneos, porfavor intente de nuevo")
+        }else{
+        //Validacion correcta de la peticion
+            
+        }
+       })    
+    }
+  }
+}
+
+
+```
+## Login HTML
+- Generacion de etiquetas para insertar texto y botones para loggearse correctamente, enlazandose con el componente anterior.
+```sh
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="https://ksatravel.net//assets/img/admin.png" id="icon" alt="User Icon" />
+      </div>
+  
+      <!-- Login Form -->
+        <input type="text" #login id="login" class="fadeIn second" name="login" placeholder="login">
+        <input type="password" #password id="password" class="fadeIn third" name="login" placeholder="password">
+        <input type="submit" class="fadeIn fourth" value="Log In" (click) = "validar_login(login.value, password.value)">
+      
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" [routerLink]="['Users/Registrar']">Necesitas una cuenta?</a>
+      </div>
+  
+    </div>
+  </div>
+```
+
+
+## Build Project
+- Para poder subir el proyecto al bucket de S3 es neceario correr el siguiente comando:
+
+```sh
+ng build
+```
+
+- En el proyecto se generara una carpeta llamada dist en la cual se encuentran los archivos generados.
+
+- Estando en el bucket es importante ponerlo publico y como un sitio estatico, ademas de esto es neceario poner publicos los archivos subidos.
+
+
