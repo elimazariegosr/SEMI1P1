@@ -18,6 +18,9 @@ Para la práctica se utilizaron de los siguientes servicios de AWS:
 - Buckets de S3
 - RDS
 
+## Base de datos MySQL
+![WhatsApp Image 2021-03-08 at 11 04 07 PM](https://user-images.githubusercontent.com/34359891/110422002-2c1b3e80-8064-11eb-876a-631d1bf4ee05.jpeg)
+
 
 ## BackEnd 💻
 ### Servidor Node JS 📲
